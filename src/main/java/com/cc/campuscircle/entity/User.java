@@ -25,7 +25,7 @@ public class User {
     private String email;
 
     @Column(name="roll_number",nullable = false,unique = true)
-    private String rollnumber;
+    private String rollNumber;
 
     @Column(nullable = false)
     private String password;
