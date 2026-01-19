@@ -8,6 +8,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import java.util.Date;
+import java.util.function.Function;
 
 @Component
 public class JwtUtil {
@@ -22,4 +23,12 @@ public class JwtUtil {
                 .signWith(SignatureAlgorithm.HS256,SECRET_KEY)
                 .compact();
     }
+    private <T> T extractClaim(String token, Function<Claims,T> claimsResolver){
+        Claims claims=Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
+        return claimsResolver.apply(claims);
+    }
+    public String extractEmail(String token){
+        return extractClaim(token,Claims::getSubject);
+    }
+
 }
