@@ -39,7 +39,7 @@ public class AuthServiceImpl implements AuthService {
 
         }
 
-        //if all conditiones surpasses then create new user
+        //if all conditions surpassed then create new user
 
         User user=new User();
         user.setEmail(email);
